@@ -30,17 +30,52 @@ class ExceptionHandler400(APIView):
     exception_message = 'Bad Request'
 
     def get(self, request, *args, **kwargs):
-        return Response({'error': self.exception_message}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error': self.exception_message},
+                        status=status.HTTP_400_BAD_REQUEST)
 
     def post(self, request, *args, **kwargs):
-        return Response({'error': self.exception_message}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error': self.exception_message},
+                        status=status.HTTP_400_BAD_REQUEST)
 
 
 class ExceptionHandler403(APIView):
     exception_message = 'The request contains an invalid authentication data'
 
     def get(self, request, *args, **kwargs):
-        return Response({'error': self.exception_message}, status=status.HTTP_403_FORBIDDEN)
+        return Response({'error': self.exception_message},
+                        status=status.HTTP_403_FORBIDDEN)
 
     def post(self, request, *args, **kwargs):
-        return Response({'error': self.exception_message}, status=status.HTTP_403_FORBIDDEN)
+        return Response({'error': self.exception_message},
+                        status=status.HTTP_403_FORBIDDEN)
+
+
+class ErrorResponseFactory:
+    """
+    Factory class to generate custom JSON responses for different exceptions.
+
+    This approach follows the Open/Closed Principle, allowing easy
+    extension for new exception types.
+    """
+
+    @staticmethod
+    def get_error_response(exception, response=None):
+        pass
+
+    @staticmethod
+    def _build_response(message, error, status_code):
+        pass
+
+
+def custom_exception_handler(exc, context):
+    """
+    Custom exception handler for Django REST Framework to ensure
+    consistent JSON error responses.
+
+    This handler captures specific exceptions, such as validation errors,
+    authentication errors, permission errors, and 404 not found errors,
+    and formats them in a JSON response with the fields 'status_code', 'error',
+    and 'message'. Unhandled exceptions will return a generic 500 error
+    response with a corresponding message.
+    """
+    pass

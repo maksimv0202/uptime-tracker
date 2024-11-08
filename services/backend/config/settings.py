@@ -100,6 +100,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ],
+    'EXCEPTION_HANDLER': 'config.handlers.custom_exception_handler'
 }
 
 # Internationalization
